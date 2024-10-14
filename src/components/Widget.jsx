@@ -4,166 +4,156 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { MessageCircle, Star } from "lucide-react"
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
 
 export const Widget = ({ projectId }) => {
-  const [rating, setRating] = useState(3)
-  const [submitted, setSubmitted] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [rating, setRating] = useState(3);
+  const [submitted, setSubmitted] = useState(false);
 
   const onSelectStar = (index) => {
-    setRating(index + 1)
-  }
+    setRating(index + 1);
+  };
 
   const submit = async (e) => {
-    e.preventDefault()
-    const form = e.target
-    const formData = new FormData(form)
-    
+    e.preventDefault();
+    const form = e.target;
     const data = {
       p_project_id: projectId,
-      p_user_name: formData.get('name'),
-      p_user_email: formData.get('email'),
-      p_message: formData.get('feedback'),
+      p_user_name: form.name.value,
+      p_user_email: form.email.value,
+      p_message: form.feedback.value,
       p_rating: rating,
-    }
-
-    try {
-      const { data: returnedData, error } = await supabase.rpc("add_feedback", data)
-      
-      if (error) {
-        throw error
-      }
-      
-      setSubmitted(true)
-      console.log('Feedback submitted:', returnedData)
-    } catch (error) {
-      console.error('Error submitting feedback:', error)
-      // Handle error (e.g., show error message to user)
-    }
-  }
+    };
+    const { data: returnedData, error } = await supabase.rpc("add_feedback", data);
+    setSubmitted(true);
+    console.log(returnedData);
+  };
 
   return (
-    <div className="widget">
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button 
-            variant="default" 
-            className="fixed bottom-4 right-4 z-50 rounded-full transition-transform hover:scale-105 bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            Feedback
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-background text-foreground">
-          <VisuallyHidden>
-            <DialogTitle>Feedback Form</DialogTitle>
-          </VisuallyHidden>
-          <DialogDescription className="sr-only">
-            We value your feedback. Please share your thoughts with us.
-          </DialogDescription>
-          <div className="w-full max-w-md rounded-lg bg-card p-6 text-card-foreground">
+    <>
+      <style>{tailwindStyles}</style>
+      <div className="widget fixed bottom-4 right-4 z-50">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button className="rounded-full shadow-lg hover:scale-105">
+              <MessageCircleIcon className="mr-2 h-5 w-5" />
+              Feedback
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="widget rounded-lg bg-card p-4 shadpw-lg w-full max-w-md">
+            <style>{tailwindStyles}</style>
             {submitted ? (
-              <ThankYouMessage onClose={() => setOpen(false)} />
+              <div>
+                <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
+                <p className="mt-4">
+                  We appreciate your feedback. It helps us improve our product and provide better
+                  service to our customers.
+                </p>
+              </div>
             ) : (
-              <FeedbackForm 
-                onSubmit={submit} 
-                rating={rating} 
-                onSelectStar={onSelectStar} 
-              />
+              <div>
+                <h3 className="text-lg font-bold">Send us your feedback</h3>
+                <form
+                  className="space-y-2"
+                  onSubmit={submit}
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="feedback">Feedback</Label>
+                    <Textarea
+                      id="feedback"
+                      placeholder="Tell us what you think"
+                      className="min-h-[100px]"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {[...Array(5)].map((_, index) => (
+                        <StarIcon
+                          key={index}
+                          className={`h-5 w-5 cursor-pointer ${
+                            rating > index ? "fill-primary" : "fill-muted stroke-muted-foreground"
+                          }`}
+                          onClick={() => onSelectStar(index)}
+                        />
+                      ))}
+                    </div>
+                    <Button type="submit">Submit</Button>
+                  </div>
+                </form>
+              </div>
             )}
-            <Separator className="my-6" />
-            <PoweredBy />
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
-  )
+            <Separator className="my-4" />
+            <div className="text-gray-600">
+              Powered by{" "}
+              <a
+                href="https://feedbacify-landing.vercel.app/"
+                target="_blank"
+                className="text-indigo-600 hover:underline"
+              >
+                feedbackify ⚡️
+              </a>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </>
+  );
+};
+
+function StarIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
 }
 
-function ThankYouMessage({ onClose }) {
+function MessageCircleIcon(props) {
   return (
-    <div className="text-center">
-      <h3 className="text-2xl font-bold text-primary">Thank you for your feedback!</h3>
-      <p className="mt-4 text-muted-foreground">
-        We appreciate your input. It helps us improve our product and provide better
-        service to our customers.
-      </p>
-      <Button 
-        className="mt-6" 
-        onClick={onClose}
-      >
-        Close
-      </Button>
-    </div>
-  )
-}
-
-function FeedbackForm({ onSubmit, rating, onSelectStar }) {
-  return (
-    <div>
-      <h3 className="text-2xl font-bold text-primary">Send us your feedback</h3>
-      <form className="mt-6 space-y-4" onSubmit={onSubmit}>
-        <FormField label="Name" id="name" placeholder="Enter your name" />
-        <FormField label="Email" id="email" type="email" placeholder="Enter your email" />
-        <FormField 
-          label="Feedback" 
-          id="feedback" 
-          as={Textarea} 
-          placeholder="Tell us what you think" 
-          className="min-h-[100px]" 
-        />
-        <div className="flex items-center justify-between">
-          <StarRating rating={rating} onSelectStar={onSelectStar} />
-          <Button type="submit">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </div>
-  )
-}
-
-function FormField({ label, id, as: Component = Input, ...props }) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id} className="text-foreground">{label}</Label>
-      <Component id={id} name={id} required className="bg-background text-foreground border-input" {...props} />
-    </div>
-  )
-}
-
-function StarRating({ rating, onSelectStar }) {
-  return (
-    <div className="flex items-center gap-2">
-      {[...Array(5)].map((_, index) => (
-        <Star
-          key={index}
-          className={`h-6 w-6 cursor-pointer ${
-            rating > index ? "fill-primary text-primary" : "text-muted-foreground"
-          }`}
-          onClick={() => onSelectStar(index)}
-        />
-      ))}
-    </div>
-  )
-}
-
-function PoweredBy() {
-  return (
-    <div className="text-center text-sm text-muted-foreground">
-      Powered by{" "}
-      <a
-        href="https://feedbacify-landing.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-medium text-primary hover:underline"
-      >
-        feedbacify ⚡️
-      </a>
-    </div>
-  )
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-message-circle"
+    >
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+    </svg>
+  );
 }
