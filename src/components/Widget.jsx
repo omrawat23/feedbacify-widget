@@ -7,9 +7,7 @@ import { useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
-  DialogPortal,
-  DialogOverlay
+  DialogTrigger
 } from "@/components/ui/dialog";
 import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
@@ -49,84 +47,81 @@ export const Widget = ({ projectId }) => {
               Feedback
             </Button>
           </DialogTrigger>
-          <DialogPortal>
-            <DialogOverlay className="bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-            <DialogContent className="sm:max-w-md">
-              <style>{tailwindStyles}</style>
-              {submitted ? (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
-                  <p className="mt-4">
-                    We appreciate your feedback. It helps us improve our product and provide better
-                    service to our customers.
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <h3 className="text-lg font-bold">Send us your feedback</h3>
-                  <form
-                    className="mt-4 space-y-4"
-                    onSubmit={submit}
-                  >
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Name</Label>
-                        <Input
-                          id="name"
-                          placeholder="Enter your name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="Enter your email"
-                        />
-                      </div>
-                    </div>
+          <DialogContent className="sm:max-w-md">
+            <style>{tailwindStyles}</style>
+            {submitted ? (
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
+                <p className="mt-4">
+                  We appreciate your feedback. It helps us improve our product and provide better
+                  service to our customers.
+                </p>
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-lg font-bold">Send us your feedback</h3>
+                <form
+                  className="mt-4 space-y-4"
+                  onSubmit={submit}
+                >
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="feedback">Feedback</Label>
-                      <Textarea
-                        id="feedback"
-                        placeholder="Tell us what you think"
-                        className="min-h-[100px]"
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        placeholder="Enter your name"
                       />
                     </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {[...Array(5)].map((_, index) => (
-                          <StarIcon
-                            key={index}
-                            className={`h-5 w-5 cursor-pointer ${
-                              rating > index 
-                                ? "fill-yellow-400" 
-                                : "fill-muted stroke-muted-foreground"
-                            }`}
-                            onClick={() => onSelectStar(index)}
-                          />
-                        ))}
-                      </div>
-                      <Button type="submit">
-                        Submit
-                      </Button>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="Enter your email"
+                      />
                     </div>
-                  </form>
-                </div>
-              )}
-              <Separator className="my-4" />
-              <div className="text-muted-foreground">
-                Powered by{" "}
-                <a
-                  href="https://feedbackifyy.vercel.app/"
-                  target="_blank"
-                  className="text-primary hover:underline"
-                >
-                  feedbackify ⚡️
-                </a>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="feedback">Feedback</Label>
+                    <Textarea
+                      id="feedback"
+                      placeholder="Tell us what you think"
+                      className="min-h-[100px]"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {[...Array(5)].map((_, index) => (
+                        <StarIcon
+                          key={index}
+                          className={`h-5 w-5 cursor-pointer ${
+                            rating > index 
+                              ? "fill-yellow-400" 
+                              : "fill-muted stroke-muted-foreground"
+                          }`}
+                          onClick={() => onSelectStar(index)}
+                        />
+                      ))}
+                    </div>
+                    <Button type="submit">
+                      Submit
+                    </Button>
+                  </div>
+                </form>
               </div>
-            </DialogContent>
-          </DialogPortal>
+            )}
+            <Separator className="my-4" />
+            <div className="text-muted-foreground">
+              Powered by{" "}
+              <a
+                href="https://feedbackifyy.vercel.app/"
+                target="_blank"
+                className="text-primary hover:underline"
+              >
+                feedbackify ⚡️
+              </a>
+            </div>
+          </DialogContent>
         </Dialog>
       </div>
     </>
