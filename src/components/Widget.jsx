@@ -32,7 +32,7 @@ export const Widget = ({ projectId }) => {
       p_message: form.feedback.value,
       p_rating: rating,
     };
-    const { data: returnedData, error } = await supabase.rpc("add_feedback", data);
+    const { data: returnedData } = await supabase.rpc("add_feedback", data);
     setSubmitted(true);
     console.log(returnedData);
   };
