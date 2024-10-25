@@ -4,13 +4,18 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger
+} from "@/components/ui/dialog";
 import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
 
 export const Widget = ({ projectId }) => {
   const [rating, setRating] = useState(3);
   const [submitted, setSubmitted] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const onSelectStar = (index) => {
     setRating(index + 1);
@@ -34,54 +39,56 @@ export const Widget = ({ projectId }) => {
   return (
     <>
       <style>{tailwindStyles}</style>
-      <div className="widget fixed bottom-4 right-4 z-50">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button className="rounded-full shadow-lg hover:scale-105">
+      <div className="fixed bottom-4 right-4 z-50">
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+          <Button className="rounded-full shadow-lg hover:scale-105">
               <MessageCircleIcon className="mr-2 h-5 w-5" />
               Feedback
             </Button>
-          </PopoverTrigger>
-          <PopoverContent className="widget rounded-lg bg-card p-4 shadpw-lg w-full max-w-md">
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md bg-background dark:bg-gray-900 dark:text-gray-100">
             <style>{tailwindStyles}</style>
             {submitted ? (
-              <div>
-                <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
-                <p className="mt-4">
+              <div className="space-y-4">
+                <h3 className="text-lg font-bold dark:text-gray-100">Thank you for your feedback!</h3>
+                <p className="mt-4 dark:text-gray-300">
                   We appreciate your feedback. It helps us improve our product and provide better
                   service to our customers.
                 </p>
               </div>
             ) : (
               <div>
-                <h3 className="text-lg font-bold">Send us your feedback</h3>
+                <h3 className="text-lg font-bold dark:text-gray-100">Send us your feedback</h3>
                 <form
-                  className="space-y-2"
+                  className="mt-4 space-y-4"
                   onSubmit={submit}
                 >
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="name" className="dark:text-gray-200">Name</Label>
                       <Input
                         id="name"
                         placeholder="Enter your name"
+                        className="dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="dark:text-gray-200">Email</Label>
                       <Input
                         id="email"
                         type="email"
                         placeholder="Enter your email"
+                        className="dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="feedback">Feedback</Label>
+                    <Label htmlFor="feedback" className="dark:text-gray-200">Feedback</Label>
                     <Textarea
                       id="feedback"
                       placeholder="Tell us what you think"
-                      className="min-h-[100px]"
+                      className="min-h-[100px] dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 dark:border-gray-700"
                     />
                   </div>
                   <div className="flex items-center justify-between">
@@ -90,30 +97,37 @@ export const Widget = ({ projectId }) => {
                         <StarIcon
                           key={index}
                           className={`h-5 w-5 cursor-pointer ${
-                            rating > index ? "fill-primary" : "fill-muted stroke-muted-foreground"
+                            rating > index 
+                              ? "fill-yellow-400 dark:fill-yellow-500" 
+                              : "fill-muted stroke-muted-foreground dark:fill-gray-700 dark:stroke-gray-500"
                           }`}
                           onClick={() => onSelectStar(index)}
                         />
                       ))}
                     </div>
-                    <Button type="submit">Submit</Button>
+                    <Button 
+                      type="submit"
+                      className="dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+                    >
+                      Submit
+                    </Button>
                   </div>
                 </form>
               </div>
             )}
-            <Separator className="my-4" />
-            <div className="text-gray-600">
+            <Separator className="my-4 dark:bg-gray-700" />
+            <div className="text-gray-600 dark:text-gray-400">
               Powered by{" "}
               <a
-                href="https://feedbacify-landing.vercel.app/"
+                href="https://feedbackifyy.vercel.app/"
                 target="_blank"
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-600 hover:underline dark:text-indigo-400"
               >
                 feedbackify ⚡️
               </a>
             </div>
-          </PopoverContent>
-        </Popover>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );
@@ -148,10 +162,9 @@ function MessageCircleIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-message-circle"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
     </svg>
