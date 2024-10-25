@@ -18,15 +18,11 @@ export const Widget = ({ projectId }) => {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState('light');
 
-  // Detect and sync with system/user theme
   useEffect(() => {
-    // Check if user prefers dark mode
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    // Check for any existing theme preference in HTML element
     const htmlTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     setTheme(htmlTheme || (isDarkMode ? 'dark' : 'light'));
 
-    // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e) => {
       const newTheme = e.matches ? 'dark' : 'light';
@@ -67,7 +63,7 @@ export const Widget = ({ projectId }) => {
               Feedback
             </Button>
           </DialogTrigger>
-          <DialogContent className={`sm:max-w-md ${theme}`}>
+          <DialogContent className={`sm:max-w-md ${theme} dark:bg-black dark:text-white`}>
             <style>{tailwindStyles}</style>
             {submitted ? (
               <div className="space-y-4">
@@ -90,6 +86,7 @@ export const Widget = ({ projectId }) => {
                       <Input
                         id="name"
                         placeholder="Enter your name"
+                        className="dark:bg-gray-900 dark:border-gray-700"
                       />
                     </div>
                     <div className="space-y-2">
@@ -98,6 +95,7 @@ export const Widget = ({ projectId }) => {
                         id="email"
                         type="email"
                         placeholder="Enter your email"
+                        className="dark:bg-gray-900 dark:border-gray-700"
                       />
                     </div>
                   </div>
@@ -106,7 +104,7 @@ export const Widget = ({ projectId }) => {
                     <Textarea
                       id="feedback"
                       placeholder="Tell us what you think"
-                      className="min-h-[100px]"
+                      className="min-h-[100px] dark:bg-gray-900 dark:border-gray-700"
                     />
                   </div>
                   <div className="flex items-center justify-between">
@@ -117,7 +115,7 @@ export const Widget = ({ projectId }) => {
                           className={`h-5 w-5 cursor-pointer ${
                             rating > index 
                               ? "fill-yellow-400" 
-                              : "fill-muted stroke-muted-foreground"
+                              : "dark:fill-gray-700 dark:stroke-gray-400 fill-muted stroke-muted-foreground"
                           }`}
                           onClick={() => onSelectStar(index)}
                         />
@@ -130,13 +128,13 @@ export const Widget = ({ projectId }) => {
                 </form>
               </div>
             )}
-            <Separator className="my-4" />
-            <div className="text-muted-foreground">
+            <Separator className="my-4 dark:bg-gray-700" />
+            <div className="text-muted-foreground dark:text-gray-400">
               Powered by{" "}
               <a
                 href="https://feedbackifyy.vercel.app/"
                 target="_blank"
-                className="text-primary hover:underline"
+                className="text-primary hover:underline dark:text-white"
               >
                 feedbackify ⚡️
               </a>
