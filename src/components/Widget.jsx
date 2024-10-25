@@ -47,7 +47,7 @@ export const Widget = ({ projectId }) => {
               Feedback
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md bg-background">
+          <DialogContent className="sm:max-w-md">
             <style>{tailwindStyles}</style>
             {submitted ? (
               <div className="space-y-4">
@@ -111,12 +111,12 @@ export const Widget = ({ projectId }) => {
               </div>
             )}
             <Separator className="my-4" />
-            <div className="text-gray-600">
+            <div className="text-muted-foreground">
               Powered by{" "}
               <a
                 href="https://feedbackifyy.vercel.app/"
                 target="_blank"
-                className="text-indigo-600 hover:underline"
+                className="text-primary hover:underline"
               >
                 feedbackify ⚡️
               </a>
