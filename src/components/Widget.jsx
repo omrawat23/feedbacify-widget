@@ -31,7 +31,7 @@ export const Widget = ({ projectId }) => {
       p_message: form.feedback.value,
       p_rating: rating,
     };
-    const { data: returnedData, error } = await supabase.rpc("add_feedback", data);
+    const { data: returnedData } = await supabase.rpc("add_feedback", data);
     setSubmitted(true);
     console.log(returnedData);
   };
@@ -48,7 +48,6 @@ export const Widget = ({ projectId }) => {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md bg-background">
-        <style>{tailwindStyles}</style>
           {submitted ? (
             <div className="space-y-4">
               <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
@@ -90,6 +89,7 @@ export const Widget = ({ projectId }) => {
                   />
                 </div>
                 <div className="flex items-center justify-between">
+                <style>{tailwindStyles}
                   <div className="flex items-center gap-2">
                     {[...Array(5)].map((_, index) => (
                       <StarIcon
@@ -103,6 +103,7 @@ export const Widget = ({ projectId }) => {
                       />
                     ))}
                   </div>
+                  </style>
                   <Button type="submit">
                     Submit
                   </Button>
