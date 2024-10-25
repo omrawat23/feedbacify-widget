@@ -47,7 +47,8 @@ export const Widget = ({ projectId }) => {
             Feedback
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md bg-white p-6">
+        <DialogContent className="sm:max-w-md bg-background">
+        <style>{tailwindStyles}</style>
           {submitted ? (
             <div className="space-y-4">
               <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
@@ -58,56 +59,51 @@ export const Widget = ({ projectId }) => {
             </div>
           ) : (
             <div>
-              <h3 className="text-xl font-semibold mb-6">Send us your feedback</h3>
+              <h3 className="text-lg font-bold">Send us your feedback</h3>
               <form
-                className="space-y-6"
+                className="mt-4 space-y-4"
                 onSubmit={submit}
               >
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-sm text-gray-600">Name</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
                       placeholder="Enter your name"
-                      className="w-full border rounded-md p-2"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm text-gray-600">Email</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full border rounded-md p-2"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="feedback" className="text-sm text-gray-600">Feedback</Label>
+                  <Label htmlFor="feedback">Feedback</Label>
                   <Textarea
                     id="feedback"
                     placeholder="Tell us what you think"
-                    className="w-full border rounded-md p-2 min-h-[100px]"
+                    className="min-h-[100px]"
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     {[...Array(5)].map((_, index) => (
                       <StarIcon
                         key={index}
-                        className={`h-6 w-6 cursor-pointer ${
+                        className={`h-5 w-5 cursor-pointer ${
                           rating > index 
-                            ? "fill-yellow-400 stroke-yellow-400" 
-                            : "fill-gray-200 stroke-gray-200"
+                            ? "fill-yellow-400" 
+                            : "fill-muted stroke-muted-foreground"
                         }`}
                         onClick={() => onSelectStar(index)}
                       />
                     ))}
                   </div>
-                  <Button 
-                    type="submit"
-                    className="bg-gray-900 text-white px-6 py-2 rounded-md hover:bg-gray-800"
-                  >
+                  <Button type="submit">
                     Submit
                   </Button>
                 </div>
@@ -115,12 +111,12 @@ export const Widget = ({ projectId }) => {
             </div>
           )}
           <Separator className="my-4" />
-          <div className="text-gray-500 text-sm text-center">
+          <div className="text-muted-foreground">
             Powered by{" "}
             <a
               href="https://feedbackifyy.vercel.app/"
               target="_blank"
-              className="text-gray-900 hover:underline"
+              className="text-primary hover:underline"
             >
               feedbackify ⚡️
             </a>
