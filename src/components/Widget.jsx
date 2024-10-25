@@ -1,21 +1,17 @@
+
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
 
 export const Widget = ({ projectId }) => {
   const [rating, setRating] = useState(3);
   const [submitted, setSubmitted] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const onSelectStar = (index) => {
     setRating(index + 1);
@@ -31,98 +27,95 @@ export const Widget = ({ projectId }) => {
       p_message: form.feedback.value,
       p_rating: rating,
     };
-    const { data: returnedData } = await supabase.rpc("add_feedback", data);
+    const { data: returnedData, error } = await supabase.rpc("add_feedback", data);
     setSubmitted(true);
     console.log(returnedData);
   };
 
   return (
-    <>  
-    <style>{tailwindStyles}</style>
-    <div className="fixed bottom-4 right-4 z-50">
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="rounded-full shadow-lg hover:scale-105">
-            <MessageCircleIcon className="mr-2 h-5 w-5" />
-            Feedback
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md bg-background">
-          {submitted ? (
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
-              <p className="mt-4">
-                We appreciate your feedback. It helps us improve our product and provide better
-                service to our customers.
-              </p>
-            </div>
-          ) : (
-            <div>
-              <h3 className="text-lg font-bold">Send us your feedback</h3>
-              <form
-                className="mt-4 space-y-4"
-                onSubmit={submit}
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      placeholder="Enter your name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="feedback">Feedback</Label>
-                  <Textarea
-                    id="feedback"
-                    placeholder="Tell us what you think"
-                    className="min-h-[100px]"
-                  />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    {[...Array(5)].map((_, index) => (
-                      <StarIcon
-                        key={index}
-                        className={`h-5 w-5 cursor-pointer ${
-                          rating > index 
-                            ? "fill-yellow-400" 
-                            : "fill-muted stroke-muted-foreground"
-                        }`}
-                        onClick={() => onSelectStar(index)}
+    <>
+      <style>{tailwindStyles}</style>
+      <div className="widget fixed bottom-4 right-4 z-50">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button className="rounded-full shadow-lg hover:scale-105">
+              <MessageCircleIcon className="mr-2 h-5 w-5" />
+              Feedback
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="widget rounded-lg bg-card p-4 shadpw-lg w-full max-w-md">
+            <style>{tailwindStyles}</style>
+            {submitted ? (
+              <div>
+                <h3 className="text-lg font-bold">Thank you for your feedback!</h3>
+                <p className="mt-4">
+                  We appreciate your feedback. It helps us improve our product and provide better
+                  service to our customers.
+                </p>
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-lg font-bold">Send us your feedback</h3>
+                <form
+                  className="space-y-2"
+                  onSubmit={submit}
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        placeholder="Enter your name"
                       />
-                    ))}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="Enter your email"
+                      />
+                    </div>
                   </div>
-                  <Button type="submit">
-                    Submit
-                  </Button>
-                </div>
-              </form>
+                  <div className="space-y-2">
+                    <Label htmlFor="feedback">Feedback</Label>
+                    <Textarea
+                      id="feedback"
+                      placeholder="Tell us what you think"
+                      className="min-h-[100px]"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {[...Array(5)].map((_, index) => (
+                        <StarIcon
+                          key={index}
+                          className={`h-5 w-5 cursor-pointer ${
+                            rating > index ? "fill-primary" : "fill-muted stroke-muted-foreground"
+                          }`}
+                          onClick={() => onSelectStar(index)}
+                        />
+                      ))}
+                    </div>
+                    <Button type="submit">Submit</Button>
+                  </div>
+                </form>
+              </div>
+            )}
+            <Separator className="my-4" />
+            <div className="text-gray-600">
+              Powered by{" "}
+              <a
+                href="https://nexx-saas.vercel.app/"
+                target="_blank"
+                className="text-indigo-600 hover:underline"
+              >
+                Nexx ⚡️
+              </a>
             </div>
-          )}
-          <Separator className="my-4" />
-          <div className="text-muted-foreground">
-            Powered by{" "}
-            <a
-              href="https://feedbackifyy.vercel.app/"
-              target="_blank"
-              className="text-primary hover:underline"
-            >
-              feedbackify ⚡️
-            </a>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
+          </PopoverContent>
+        </Popover>
+      </div>
     </>
   );
 };
@@ -156,9 +149,10 @@ function MessageCircleIcon(props) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-message-circle"
     >
       <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
     </svg>
