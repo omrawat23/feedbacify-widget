@@ -3,7 +3,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +16,26 @@ export const Widget = ({ projectId }) => {
   const [rating, setRating] = useState(3);
   const [submitted, setSubmitted] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  // Detect and sync with system/user theme
+  useEffect(() => {
+    // Check if user prefers dark mode
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Check for any existing theme preference in HTML element
+    const htmlTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    setTheme(htmlTheme || (isDarkMode ? 'dark' : 'light'));
+
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e) => {
+      const newTheme = e.matches ? 'dark' : 'light';
+      setTheme(newTheme);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const onSelectStar = (index) => {
     setRating(index + 1);
@@ -47,7 +67,7 @@ export const Widget = ({ projectId }) => {
               Feedback
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className={`sm:max-w-md ${theme}`}>
             <style>{tailwindStyles}</style>
             {submitted ? (
               <div className="space-y-4">
