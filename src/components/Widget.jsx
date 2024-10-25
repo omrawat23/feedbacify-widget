@@ -40,10 +40,10 @@ export const Widget = ({ projectId }) => {
     <div className="fixed bottom-4 right-4 z-50">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="rounded-full shadow-lg hover:scale-105">
-            <MessageCircleIcon className="mr-2 h-5 w-5" />
-            Feedback
-          </Button>
+        <Button className="rounded-full shadow-lg hover:scale-105">
+              <MessageCircleIcon className="mr-2 h-5 w-5" />
+              Feedback
+            </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md bg-background">
           {submitted ? (
