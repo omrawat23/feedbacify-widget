@@ -89,7 +89,7 @@ export const Widget = ({ projectId }) => {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                <style>{tailwindStyles}
+                <style>{tailwindStyles}</style>
                   <div className="flex items-center gap-2">
                     {[...Array(5)].map((_, index) => (
                       <StarIcon
@@ -103,7 +103,6 @@ export const Widget = ({ projectId }) => {
                       />
                     ))}
                   </div>
-                  </style>
                   <Button type="submit">
                     Submit
                   </Button>
