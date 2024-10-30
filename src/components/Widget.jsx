@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { MessageCircle, X, Star } from 'lucide-react';
-import '../index.css';
+import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
 
 export const Widget = ({ projectId }) => {
@@ -29,12 +29,14 @@ export const Widget = ({ projectId }) => {
   };
 
   return (
+    <> <style>{tailwindStyles}</style> 
     <div className="fbw-root">
 
       <button className="fbw-trigger-button" onClick={() => setOpen(true)}>
         <MessageCircle className="fbw-icon" />
         feedback
       </button>
+      
 
       {open && (
         <div className="fbw-dialog">
@@ -126,5 +128,6 @@ export const Widget = ({ projectId }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
