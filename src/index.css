@@ -1,76 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+body {
+  @apply font-sans;
+}
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
- 
-@layer base {
+
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.fbw-root {
+  --fbw-background: hsl(0, 0%, 100%);
+  --fbw-foreground: hsl(222.2, 84%, 4.9%);
+  --fbw-primary: hsl(222.2, 47.4%, 11.2%);
+  --fbw-primary-foreground: hsl(210, 40%, 98%);
+  --fbw-muted: hsl(210, 40%, 96.1%);
+  --fbw-muted-foreground: hsl(215.4, 16.3%, 46.9%);
+  --fbw-border: hsl(214.3, 31.8%, 91.4%);
+  --fbw-radius: 0.5rem;
+
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 9999;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--fbw-background);
+  color: var(--fbw-foreground);
+  padding: 1rem;
+}
+
+.fbw-root * {
+  all: unset;
+  box-sizing: border-box;
+}
+
+.fbw-root.fbw-dark {
+  --fbw-background: hsl(222.2 84% 4.9%);
+  --fbw-foreground: hsl(210 40% 98%);
+  --fbw-primary: hsl(210 40% 98%);
+  --fbw-muted: hsl(217.2 32.6% 17.5%);
+  --fbw-muted-foreground: hsl(215 20.2% 65.1%);
+  --fbw-border: hsl(217.2 32.6% 17.5%);
+}
+
+.fbw-trigger-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--fbw-primary);
+  color: var(--fbw-primary-foreground);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.fbw-trigger-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fbw-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.fbw-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--fbw-background);
+  color: var(--fbw-foreground);
+  padding: 2rem;
+  border-radius: var(--fbw-radius);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 90%;
+  max-width: 425px;
+}
+
+.fbw-dialog-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.fbw-form-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fbw-label {
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.fbw-input,
+.fbw-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--fbw-border);
+  border-radius: var(--fbw-radius);
+  background: var(--fbw-background);
+  color: var(--fbw-foreground);
+  transition: border-color 0.2s;
+}
+
+.fbw-input:focus,
+.fbw-textarea:focus {
+  outline: none;
+  border-color: var(--fbw-primary);
+}
+
+.fbw-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.fbw-star {
+  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s;
+  fill: none;
+  stroke: currentColor;
+}
+
+.fbw-star:hover {
+  transform: scale(1.1);
+}
+
+.fbw-star.active {
+  fill: #facc15;
+  color: #facc15;
+}
+
+.fbw-footer {
+  margin-left: 85px;
+  display: flex;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--fbw-muted-foreground);
+  margin-top: 2rem;
+}
+
+.fbw-footer a {
+  color: var(--fbw-primary);
+  text-decoration: none;
+}
+
+.fbw-footer a:hover {
+  text-decoration: underline;
+}
+
+.fbw-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.fbw-stars-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fbw-submit-button {
+  background: var(--fbw-primary);
+  color: var(--fbw-primary-foreground);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--fbw-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.fbw-submit-button:hover {
+  opacity: 0.9;
+}
+
+.fbw-separator {
+  height: 1px;
+  background: var(--fbw-border);
+  margin: 1rem 0;
 }
