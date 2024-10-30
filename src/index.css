@@ -162,7 +162,7 @@
 }
 
 .fbw-dialog {
-  position: relative !important;
+  position: absolute !important;
   z-index: 2147483647 !important;
   isolation: isolate !important;
   font-family: 'Rubik', sans-serif;
