@@ -4,14 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-sans;
-}
-
-
 
 @layer base {
   :root {
+    --fbw-background: #ffffff;
+    --fbw-foreground: #000000;
+    --fbw-radius: 8px;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -66,7 +64,7 @@ body {
 }
 
 .fbw-root {
-  --fbw-background: hsl(0, 0%, 100%);
+    font-family: 'Rubik', sans-serif;
   --fbw-foreground: hsl(222.2, 84%, 4.9%);
   --fbw-primary: hsl(222.2, 47.4%, 11.2%);
   --fbw-primary-foreground: hsl(210, 40%, 98%);
@@ -89,6 +87,41 @@ body {
   all: unset;
   box-sizing: border-box;
 } */
+
+
+.fbw-close-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.fbw-close-button:hover {
+  opacity: 1;
+}
+
+.fbw-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
 
 .fbw-root.fbw-dark {
   --fbw-background: hsl(222.2 84% 4.9%);
