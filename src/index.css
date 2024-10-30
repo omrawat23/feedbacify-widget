@@ -109,18 +109,7 @@
   opacity: 1;
 }
 
-.fbw-dialog-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
+
 
 
 .fbw-root.fbw-dark {
@@ -158,6 +147,7 @@
 }
 
 .fbw-dialog {
+  font-family: 'Rubik', sans-serif;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -172,8 +162,9 @@
 }
 
 .fbw-dialog-title {
-  font-size: 1.25rem;
+  font-family: 'Rubik', sans-serif;
   font-weight: 600;
+  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 
@@ -186,6 +177,7 @@
 }
 
 .fbw-label {
+  font-family: 'Rubik', sans-serif;
   display: block;
   font-size: 0.875rem;
   margin-bottom: 0.25rem;
