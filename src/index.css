@@ -112,7 +112,10 @@
 }
 
 .fbw-dialog-backdrop {
-  position: fixed;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  isolation: isolate !important;
   top: 0;
   left: 0;
   right: 0;
@@ -121,8 +124,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999999;
-  isolation: isolate;
 }
 
 
@@ -161,6 +162,9 @@
 }
 
 .fbw-dialog {
+  position: relative !important;
+  z-index: 2147483647 !important;
+  isolation: isolate !important;
   font-family: 'Rubik', sans-serif;
   top: 50%;
   left: 50%;
@@ -172,9 +176,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 90%;
   max-width: 425px;
-  position: absolute;
-  z-index: 1000000;
-  isolation: isolate;
+
 }
 
 .fbw-dialog-title {
