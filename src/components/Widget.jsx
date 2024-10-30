@@ -39,6 +39,8 @@ export const Widget = ({ projectId }) => {
   };
 
   return (
+    <>
+      <style>{tailwindStyles}</style>
     <div className={`fbw-root ${isDark ? 'fbw-dark' : ''}`}>
       <button className="fbw-trigger-button" onClick={() => setOpen(true)}>
         <MessageCircle className="fbw-icon" />
@@ -149,5 +151,6 @@ export const Widget = ({ projectId }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
