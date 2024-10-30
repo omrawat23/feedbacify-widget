@@ -5,7 +5,10 @@ function App() {
 
   return (
     <>
-      <Widget projectId="21" />
+    <div className="bg-black">
+    <Widget projectId="21" />
+    </div>
+      
     </>
   );
 }

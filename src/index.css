@@ -84,11 +84,11 @@ body {
   color: var(--fbw-foreground);
   padding: 1rem;
 }
-
+/* 
 .fbw-root * {
   all: unset;
   box-sizing: border-box;
-}
+} */
 
 .fbw-root.fbw-dark {
   --fbw-background: hsl(222.2 84% 4.9%);
