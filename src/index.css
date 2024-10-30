@@ -33,8 +33,8 @@
   }
 
   .dark {
-    --fbw-background: #000000;
-    --fbw-foreground: #ffffff;
+    --fbw-background: hsl(222.2 84% 4.9%);
+    --fbw-foreground: hsl(210 40% 98%);
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -169,14 +169,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--fbw-background);
+  background-color: var(--fbw-background);
   color: var(--fbw-foreground);
   padding: 2rem;
   border-radius: var(--fbw-radius);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 90%;
   max-width: 425px;
-
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .fbw-dialog-title {
