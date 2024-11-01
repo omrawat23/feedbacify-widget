@@ -143,8 +143,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: var(--fbw-foreground);
-  color: var(--fbw-background);
+  background: #1e1c27;
+  color: white;
   border-radius: 9999px;
   font-weight: 500;
   transition: all 0.2s;
