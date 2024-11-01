@@ -7,18 +7,9 @@
 
 @layer base {
   :root {
-    /* Base theme variables */
-    --fbw-background: hsl(0 0% 100%); /* White */
-    --fbw-foreground: hsl(222.2 84% 4.9%);
-    --fbw-primary: hsl(222.2 47.4% 11.2%);
-    --fbw-primary-foreground: hsl(210 40% 98%);
-    --fbw-muted: hsl(210 40% 96.1%);
-    --fbw-muted-foreground: hsl(215.4 16.3% 46.9%);
-    --fbw-border: hsl(214.3 31.8% 91.4%);
-    --fbw-dialog: hsl(0 0% 100%);
-    --fbw-radius: 2rem;
-    
-    /* System theme variables */
+    --fbw-background: #ffffff;
+    --fbw-foreground: #000000;
+    --fbw-radius: 8px;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -38,21 +29,12 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark theme feedback widget variables */
-    --fbw-background: hsl(222.2 84% 4.9%); /* Dark background */
+    --fbw-background: hsl(222.2 84% 4.9%);
     --fbw-foreground: hsl(210 40% 98%);
-    --fbw-primary: hsl(210 40% 98%);
-    --fbw-primary-foreground: hsl(222.2 47.4% 11.2%);
-    --fbw-muted: hsl(217.2 32.6% 17.5%);
-    --fbw-muted-foreground: hsl(215 20.2% 65.1%);
-    --fbw-border: hsl(217.2 32.6% 17.5%);
-    --fbw-dialog: hsl(222.2 84% 4.9%);
-    --fbw-radius: 2rem;
-    
-    /* System dark theme variables */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -73,47 +55,152 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-/* Base styles */
 .fbw-root {
-  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--fbw-background);
-  color: var(--fbw-foreground);
+    font-family: 'Rubik', sans-serif;
+  --fbw-foreground: hsl(222.2, 84%, 4.9%);
+  --fbw-primary: hsl(222.2, 47.4%, 11.2%);
+  --fbw-primary-foreground: hsl(210, 40%, 98%);
+  --fbw-muted: hsl(210, 40%, 96.1%);
+  --fbw-muted-foreground: hsl(215.4, 16.3%, 46.9%);
+  --fbw-border: hsl(214.3, 31.8%, 91.4%);
+  --fbw-radius: 0.5rem;
+
   position: fixed;
   bottom: 15px;
   right: 15px;
   z-index: 99999;
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--fbw-background);
+  color: var(--fbw-foreground);
+  padding: 1rem;
+}
+/* 
+.fbw-root * {
+  all: unset;
+  box-sizing: border-box;
+} */
+
+
+.fbw-close-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.fbw-close-button:hover {
+  opacity: 1;
 }
 
 .fbw-dialog-backdrop {
   position: fixed !important;
   inset: 0 !important;
   z-index: 2147483647 !important;
+  isolation: isolate !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0 0 0 / 69%);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
-  isolation: isolate;
+}
+
+
+.fbw-root.fbw-dark {
+  --fbw-background: hsl(222.2 84% 4.9%);
+  --fbw-foreground: hsl(210 40% 98%);
+  --fbw-primary: hsl(210 40% 98%);
+  --fbw-muted: hsl(217.2 32.6% 17.5%);
+  --fbw-muted-foreground: hsl(215 20.2% 65.1%);
+  --fbw-border: hsl(217.2 32.6% 17.5%);
+}
+
+.fbw-trigger-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--fbw-primary);
+  color: var(--fbw-primary-foreground);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.fbw-trigger-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.fbw-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .fbw-dialog {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--fbw-dialog);
+  position: absolute !important;
+  z-index: 2147483647 !important;
+  isolation: isolate !important;
+  font-family: 'Rubik', sans-serif;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
   color: var(--fbw-foreground);
-  border: 1px solid var(--fbw-border);
-  position: relative;
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: var(--fbw-radius);
   width: 90%;
   max-width: 425px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  isolation: isolate;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Form elements */
+.fbw-dialog-title {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.fbw-form-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fbw-label {
+  font-family: 'Rubik', sans-serif;
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
 .fbw-input,
 .fbw-textarea {
   width: 100%;
@@ -129,83 +216,20 @@
 .fbw-textarea:focus {
   outline: none;
   border-color: var(--fbw-primary);
-  box-shadow: 0 0 0 2px rgba(var(--fbw-primary), 0.1);
 }
 
-/* Buttons */
-.fbw-trigger-button,
-.fbw-submit-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: #1e1c27;
-  color: white;
-  border-radius: 9999px;
-  font-weight: 500;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.fbw-textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
-.fbw-trigger-button:hover,
-.fbw-submit-button:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
-.fbw-close-button {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  padding: 0.5rem;
-  background: none;
-  border: none;
-  color: var(--fbw-foreground);
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.fbw-close-button:hover {
-  opacity: 1;
-}
-
-/* Typography */
-.fbw-dialog-title {
-  color: var(--fbw-foreground);
-  font-weight: 600;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.fbw-label {
-  color: var(--fbw-foreground);
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-}
-
-.fbw-footer {
-  color: var(--fbw-muted-foreground);
-  font-size: 0.875rem;
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.fbw-footer a {
-  color: var(--fbw-primary);
-  text-decoration: none;
-}
-
-/* Star rating */
 .fbw-star {
   cursor: pointer;
   width: 1.25rem;
   height: 1.25rem;
   transition: transform 0.2s;
   fill: none;
-  stroke: #1e1c27;
+  stroke: currentColor;
 }
 
 .fbw-star:hover {
@@ -214,15 +238,25 @@
 
 .fbw-star.active {
   fill: #facc15;
-  stroke: #facc15;
+  color: #facc15;
 }
 
-/* Layout utilities */
-.fbw-form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin: 1rem 0;
+.fbw-footer {
+  margin-left: 85px;
+  display: flex;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--fbw-muted-foreground);
+  margin-top: 2rem;
+}
+
+.fbw-footer a {
+  color: var(--fbw-primary);
+  text-decoration: none;
+}
+
+.fbw-footer a:hover {
+  text-decoration: underline;
 }
 
 .fbw-button-container {
@@ -237,8 +271,23 @@
   gap: 0.5rem;
 }
 
+.fbw-submit-button {
+  background: var(--fbw-primary);
+  color: var(--fbw-primary-foreground);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--fbw-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.fbw-submit-button:hover {
+  opacity: 0.9;
+}
+
 .fbw-separator {
   height: 1px;
-  background-color: var(--fbw-border);
+  background: var(--fbw-border);
   margin: 1rem 0;
 }
