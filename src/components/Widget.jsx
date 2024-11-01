@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { MessageCircle, X, Star } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 import tailwindStyles from "../index.css?inline";
 import supabase from "../supabaseClient";
 
