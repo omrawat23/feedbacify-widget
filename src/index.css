@@ -96,7 +96,7 @@
 
 .fbw-dialog {
   display: flex;
-  background-color: white; /* Default light mode */
+  background-color: white;
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
@@ -107,9 +107,12 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Dark mode override */
-.dark .fbw-dialog {
-  background-color: black;
+/* Try multiple selector combinations to ensure dark mode works */
+:root.dark .fbw-dialog,
+html.dark .fbw-dialog,
+.dark .fbw-dialog,
+[data-theme="dark"] .fbw-dialog {
+  background-color: black !important;
 }
 
 /* Form elements */
