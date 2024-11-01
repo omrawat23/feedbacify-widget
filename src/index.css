@@ -110,7 +110,7 @@
   border: 1px solid var(--fbw-border);
   position: relative;
   padding: 2rem;
-  border-radius: var(--fbw-radius);
+  border-radius: 20px;
   width: 90%;
   max-width: 425px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -122,7 +122,7 @@
 .fbw-textarea {
   width: 100%;
   padding: 0.75rem;
-  background-color: var(--fbw-background);
+  background-color: #1e1c27;
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   border-radius: var(--fbw-radius);
@@ -209,7 +209,7 @@
   height: 1.25rem;
   transition: transform 0.2s;
   fill: none;
-  stroke: var(--fbw-foreground);
+  stroke: #1e1c27;
 }
 
 .fbw-star:hover {
