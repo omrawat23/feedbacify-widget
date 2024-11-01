@@ -8,7 +8,7 @@
 @layer base {
   :root {
     /* Base theme variables */
-    --fbw-background: hsl(0 0% 100%);
+    --fbw-background: hsl(0 0% 100%); /* White */
     --fbw-foreground: hsl(222.2 84% 4.9%);
     --fbw-primary: hsl(222.2 47.4% 11.2%);
     --fbw-primary-foreground: hsl(210 40% 98%);
@@ -41,7 +41,7 @@
 
   .dark {
     /* Dark theme feedback widget variables */
-    --fbw-background: hsl(222.2 84% 4.9%);
+    --fbw-background: hsl(222.2 84% 4.9%); /* Dark background */
     --fbw-foreground: hsl(210 40% 98%);
     --fbw-primary: hsl(210 40% 98%);
     --fbw-primary-foreground: hsl(222.2 47.4% 11.2%);
@@ -96,7 +96,7 @@
 
 .fbw-dialog {
   display: flex;
-  background-color: white;
+  background-color: var(--fbw-background); /* Use theme variable instead of hardcoded white */
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
