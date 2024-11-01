@@ -96,7 +96,7 @@
 
 .fbw-dialog {
   display: flex;
-  background-color: var(--fbw-background); /* Use theme variable instead of hardcoded white */
+  background-color: white; /* Default light mode */
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
@@ -105,6 +105,11 @@
   width: 90%;
   max-width: 425px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark mode override */
+.dark .fbw-dialog {
+  background-color: black;
 }
 
 /* Form elements */
