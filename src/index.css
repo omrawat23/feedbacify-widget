@@ -88,7 +88,7 @@
   position: fixed !important;
   inset: 0 !important;
   z-index: 2147483647 !important;
-  background-color: rgb(0 0 0 / 69%);
+  background-color: var(--fbw-muted-foreground);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +96,7 @@
 
 .fbw-dialog {
   display: flex;
-  background-color: white;
+  background-color: var(--fbw-background); /* Use theme variable instead of hardcoded white */
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
@@ -105,14 +105,6 @@
   width: 90%;
   max-width: 425px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* Try multiple selector combinations to ensure dark mode works */
-:root.dark .fbw-dialog,
-html.dark .fbw-dialog,
-.dark .fbw-dialog,
-[data-theme="dark"] .fbw-dialog {
-  background-color: black !important;
 }
 
 /* Form elements */
