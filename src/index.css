@@ -16,6 +16,10 @@
     --fbw-muted-foreground: hsl(215.4 16.3% 46.9%);
     --fbw-border: hsl(214.3 31.8% 91.4%);
     --fbw-radius: 0.5rem;
+    --fbw-dialog-background: hsl(0 0% 100%);
+    --fbw-foreground: hsl(222.2 84% 4.9%);
+    --fbw-border: hsl(214.3 31.8% 91.4%);
+    --fbw-radius: 0.5rem;
     
     /* System theme variables */
     --background: 0 0% 100%;
@@ -47,6 +51,9 @@
     --fbw-primary-foreground: hsl(222.2 47.4% 11.2%);
     --fbw-muted: hsl(217.2 32.6% 17.5%);
     --fbw-muted-foreground: hsl(215 20.2% 65.1%);
+    --fbw-border: hsl(217.2 32.6% 17.5%);
+    --fbw-dialog-background: hsl(222.2 84% 4.9%);
+    --fbw-foreground: hsl(210 40% 98%);
     --fbw-border: hsl(217.2 32.6% 17.5%);
     
     /* System dark theme variables */
@@ -88,16 +95,17 @@
   position: fixed !important;
   inset: 0 !important;
   z-index: 2147483647 !important;
-  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black that works in both modes */
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px); /* Optional: adds a slight blur effect */
+  backdrop-filter: blur(4px);
+  isolation: isolate;
 }
-
 .fbw-dialog {
   display: flex;
-  background-color: var(--fbw-background); /* Use theme variable instead of hardcoded white */
+  flex-direction: column;
+  background-color: var(--fbw-dialog-background);
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
@@ -106,6 +114,7 @@
   width: 90%;
   max-width: 425px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  isolation: isolate;
 }
 
 /* Form elements */
