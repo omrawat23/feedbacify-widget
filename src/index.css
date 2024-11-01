@@ -85,14 +85,16 @@
 }
 
 .fbw-dialog-backdrop {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 2147483647 !important;
-  background-color: var(--fbw-muted-foreground);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .fbw-dialog-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147483647 !important;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black that works in both modes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px); /* Optional: adds a slight blur effect */
+  }
 
 .fbw-dialog {
   display: flex;
