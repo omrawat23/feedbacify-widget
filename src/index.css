@@ -88,7 +88,7 @@
   position: fixed !important;
   inset: 0 !important;
   z-index: 2147483647 !important;
-  background-color: var(--fbw-background);
+  background-color: rgb(0 0 0 / 69%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +96,7 @@
 
 .fbw-dialog {
   display: flex;
-  background-color: var(--fbw-background);
+  background-color: white;
   color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   position: relative;
