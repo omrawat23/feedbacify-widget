@@ -16,8 +16,6 @@
     --fbw-muted-foreground: hsl(215.4 16.3% 46.9%);
     --fbw-border: hsl(214.3 31.8% 91.4%);
     --fbw-dialog: hsl(0 0% 100%);
-    --fbw-foreground: hsl(222.2 84% 4.9%);
-    --fbw-border: hsl(214.3 31.8% 91.4%);
     --fbw-radius: 2rem;
     
     /* System theme variables */
@@ -52,8 +50,6 @@
     --fbw-muted-foreground: hsl(215 20.2% 65.1%);
     --fbw-border: hsl(217.2 32.6% 17.5%);
     --fbw-dialog: hsl(222.2 84% 4.9%);
-    --fbw-foreground: hsl(210 40% 98%);
-    --fbw-border: hsl(217.2 32.6% 17.5%);
     --fbw-radius: 2rem;
     
     /* System dark theme variables */
@@ -122,10 +118,10 @@
 .fbw-textarea {
   width: 100%;
   padding: 0.75rem;
-  background-color: #1e1c27;
-  color: var(--fbw-foreground);
   border: 1px solid var(--fbw-border);
   border-radius: var(--fbw-radius);
+  background: var(--fbw-background);
+  color: var(--fbw-foreground);
   transition: border-color 0.2s;
 }
 
