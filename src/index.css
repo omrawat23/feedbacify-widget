@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --fbw-background: #ffffff;
     --fbw-foreground: #000000;
+    --fbw-dialog-bg: #ffffff;
     --fbw-radius: 8px;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -33,8 +33,9 @@
   }
 
   .dark {
-    --fbw-background: hsl(222.2 84% 4.9%);
-    --fbw-foreground: hsl(210 40% 98%);
+    --fbw-background: #ffffff;
+    --fbw-foreground: #1a1a1a;
+    --fbw-dialog-bg: #1a1a1a;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -66,8 +67,7 @@
 }
 
 .fbw-root {
-    font-family: 'Rubik', sans-serif;
-  --fbw-foreground: hsl(222.2, 84%, 4.9%);
+  font-family: 'Rubik', sans-serif;
   --fbw-primary: hsl(222.2, 47.4%, 11.2%);
   --fbw-primary-foreground: hsl(210, 40%, 98%);
   --fbw-muted: hsl(210, 40%, 96.1%);
@@ -84,13 +84,40 @@
   color: var(--fbw-foreground);
   padding: 1rem;
 }
-/*
-.fbw-root * {
-  all: unset;
-  box-sizing: border-box;
-} */
 
+.fbw-dialog {
+  position: absolute !important;
+  z-index: 2147483647 !important;
+  isolation: isolate !important;
+  font-family: 'Rubik', sans-serif;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--fbw-dialog-bg);
+  color: var(--fbw-foreground);
+  padding: 2rem;
+  border-radius: var(--fbw-radius);
+  width: 90%;
+  max-width: 425px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
 
+.fbw-root.fbw-dark {
+  --fbw-background: #ffffff;
+  --fbw-foreground: #1a1a1a;
+  --fbw-primary: hsl(210 40% 98%);
+  --fbw-muted: hsl(217.2 32.6% 17.5%);
+  --fbw-muted-foreground: hsl(215 20.2% 65.1%);
+  --fbw-border: hsl(217.2 32.6% 17.5%);
+}
+
+.fbw-dark .fbw-dialog {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Rest of the CSS remains the same */
 .fbw-close-button {
   position: absolute;
   right: 1rem;
@@ -124,16 +151,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-
-.fbw-root.fbw-dark {
-  --fbw-background: hsl(222.2 84% 4.9%);
-  --fbw-foreground: hsl(210 40% 98%);
-  --fbw-primary: hsl(210 40% 98%);
-  --fbw-muted: hsl(217.2 32.6% 17.5%);
-  --fbw-muted-foreground: hsl(215 20.2% 65.1%);
-  --fbw-border: hsl(217.2 32.6% 17.5%);
 }
 
 .fbw-trigger-button {
