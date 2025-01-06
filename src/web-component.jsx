@@ -1,6 +1,7 @@
 import ReactDom from "react-dom/client";
 import {Widget} from "./components/Widget";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const normalizeAttribute = (attribute) => {
   return attribute.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 };
